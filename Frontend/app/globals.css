@@ -1,0 +1,322 @@
+@import "tailwindcss";
+@custom-variant dark (&:where(.dark, .dark *));
+
+:root {
+  --background: #ffffff;
+  --foreground: #09090b;
+  --muted: #71717a;
+  --surface: #ffffff;
+  --surface-strong: #f4f4f5;
+  --surface-dark: #18181b;
+  --border-soft: rgba(0, 0, 0, 0.08);
+  --line: rgba(0, 0, 0, 0.12);
+  --brand: #09090b;
+  --accent: #09090b;
+  --accent-soft: rgba(0, 0, 0, 0.05);
+  --accent-2: #3f3f46;
+  --accent-3: #18181b;
+  --hero-a: transparent;
+  --hero-b: transparent;
+  --hero-c: transparent;
+  --hero-left-bg: #ffffff;
+  --hero-left-gradient: none;
+  --hero-right-bg: #fafafa;
+  --hero-panel-border: rgba(0, 0, 0, 0.08);
+  --hero-panel-shadow: 0 4px 24px rgba(0, 0, 0, 0.04);
+  --hero-badge-bg: #ffffff;
+  --hero-badge-border: rgba(0, 0, 0, 0.1);
+  --hero-badge-text: #09090b;
+  --hero-stat-bg: rgba(255, 255, 255, 0.8);
+  --hero-stat-border: rgba(0, 0, 0, 0.06);
+  --hero-marquee-tag-bg: #ffffff;
+  --hero-marquee-tag-border: rgba(0, 0, 0, 0.1);
+  --hero-btn-primary-bg: #09090b;
+  --hero-btn-primary-text: #ffffff;
+  --hero-btn-secondary-bg: #ffffff;
+  --hero-btn-secondary-border: rgba(0, 0, 0, 0.15);
+  --hero-btn-secondary-text: #09090b;
+  --card-bg-gradient: #ffffff;
+}
+
+.dark {
+  --background: #09090b;
+  --foreground: #fafafa;
+  --muted: #a1a1aa;
+  --surface: rgba(24, 24, 27, 0.6);
+  --surface-strong: #18181b;
+  --surface-dark: #000000;
+  --border-soft: rgba(255, 255, 255, 0.08);
+  --line: rgba(255, 255, 255, 0.12);
+  --brand: #fafafa;
+  --accent: #fafafa;
+  --accent-soft: rgba(255, 255, 255, 0.08);
+  --accent-2: #d4d4d8;
+  --accent-3: #e4e4e7;
+  --hero-a: transparent;
+  --hero-b: transparent;
+  --hero-c: transparent;
+  --hero-left-bg: #09090b;
+  --hero-left-gradient: none;
+  --hero-right-bg: #111113;
+  --hero-panel-border: rgba(255, 255, 255, 0.08);
+  --hero-panel-shadow: 0 16px 40px rgba(0, 0, 0, 0.6);
+  --hero-badge-bg: rgba(24, 24, 27, 0.8);
+  --hero-badge-border: rgba(255, 255, 255, 0.12);
+  --hero-badge-text: #fafafa;
+  --hero-stat-bg: rgba(24, 24, 27, 0.6);
+  --hero-stat-border: rgba(255, 255, 255, 0.08);
+  --hero-marquee-tag-bg: rgba(24, 24, 27, 0.6);
+  --hero-marquee-tag-border: rgba(255, 255, 255, 0.12);
+  --hero-btn-primary-bg: #fafafa;
+  --hero-btn-primary-text: #09090b;
+  --hero-btn-secondary-bg: #18181b;
+  --hero-btn-secondary-border: rgba(255, 255, 255, 0.15);
+  --hero-btn-secondary-text: #fafafa;
+  --card-bg-gradient: #18181b;
+}
+
+@theme inline {
+  --color-background: var(--background);
+  --color-foreground: var(--foreground);
+  --font-sans: var(--font-body);
+  --font-mono: var(--font-body);
+}
+
+* {
+  box-sizing: border-box;
+}
+
+html {
+  color-scheme: light;
+  background: var(--background);
+}
+
+html.dark {
+  color-scheme: dark;
+}
+
+body {
+  min-height: 100%;
+  background-color: var(--background);
+  color: var(--foreground);
+  font-family: var(--font-body), sans-serif;
+  text-rendering: optimizeLegibility;
+  overflow-x: hidden;
+  /* Minimal noise texture for premium feel */
+  background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noiseFilter'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.65' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noiseFilter)' opacity='0.03'/%3E%3C/svg%3E");
+}
+
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+  font-family: var(--font-display), sans-serif;
+  letter-spacing: -0.05em; /* Tighter tracking for modern look */
+}
+
+a,
+button,
+input,
+select,
+textarea {
+  transition-property: color, background-color, border-color, opacity, box-shadow, transform;
+  transition-duration: 200ms;
+  transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+input,
+select,
+textarea {
+  min-width: 0;
+}
+
+::selection {
+  background: rgba(0, 0, 0, 0.15);
+}
+
+.dark ::selection {
+  background: rgba(255, 255, 255, 0.15);
+}
+
+/* ─── Hero Panel ─────────────────────────────────── */
+.hero-panel {
+  border: 1px solid var(--hero-panel-border);
+  box-shadow: var(--hero-panel-shadow);
+  overflow: hidden;
+  border-radius: 32px;
+}
+
+.hero-left {
+  background: var(--hero-left-bg);
+  border-right: 1px solid var(--hero-panel-border);
+}
+
+.hero-right {
+  background: var(--hero-right-bg);
+}
+
+.hero-badge {
+  border: 1px solid var(--hero-badge-border);
+  background: var(--hero-badge-bg);
+  color: var(--hero-badge-text);
+  box-shadow: 0 2px 8px rgba(0,0,0,0.02);
+}
+
+.hero-stat-card {
+  border: 1px solid var(--hero-stat-border);
+  background: var(--hero-stat-bg);
+  backdrop-filter: blur(12px);
+  box-shadow: 0 4px 12px rgba(0,0,0,0.02);
+}
+
+.hero-marquee-tag {
+  border: 1px solid var(--hero-marquee-tag-border);
+  background: var(--hero-marquee-tag-bg);
+  color: var(--hero-badge-text);
+}
+
+.hero-btn-primary {
+  background: var(--hero-btn-primary-bg);
+  color: var(--hero-btn-primary-text);
+}
+
+.hero-btn-primary:hover {
+  transform: translateY(-1px);
+  box-shadow: 0 6px 20px rgba(0,0,0,0.1);
+}
+
+.hero-btn-secondary {
+  border: 1px solid var(--hero-btn-secondary-border);
+  background: var(--hero-btn-secondary-bg);
+  color: var(--hero-btn-secondary-text);
+}
+
+.hero-btn-secondary:hover {
+  background: var(--surface-strong);
+}
+
+/* ─── Grain overlay ──────────────────────────────── */
+.grain-overlay {
+  position: relative;
+}
+
+/* ─── Editorial Shell ─────────────────────────────── */
+.editorial-shell {
+  border: 1px solid var(--border-soft);
+  background: var(--surface);
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.03);
+  border-radius: 24px;
+}
+
+/* ─── Mesh Panel (Cleaned up) ──────────────────────────────────── */
+.mesh-panel {
+  position: relative;
+  overflow: hidden;
+  background: var(--surface-strong);
+  border: 1px solid var(--border-soft);
+  border-radius: 24px;
+}
+
+/* ─── Glass Card ──────────────────────────────────── */
+.glass-card {
+  border: 1px solid var(--border-soft);
+  background: var(--surface);
+  box-shadow: 0 4px 16px rgba(0, 0, 0, 0.02);
+  border-radius: 20px;
+}
+.glass-card:hover {
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.04);
+  transform: translateY(-2px);
+}
+
+/* ─── Headline Glow ───────────────────────────────── */
+.headline-glow {
+  color: var(--foreground);
+}
+
+/* ─── Hero fade animation ─────────────────────────── */
+.hero-fade-enter {
+  animation: hero-fade 680ms cubic-bezier(0.22, 1, 0.36, 1);
+}
+
+/* ─── Marquee ─────────────────────────────────────── */
+.marquee-strip {
+  overflow: hidden;
+  white-space: nowrap;
+}
+
+.marquee-track {
+  display: inline-flex;
+  min-width: max-content;
+  gap: 0.75rem;
+  animation: marquee-scroll 26s linear infinite;
+}
+
+/* ─── Keyframes ────────────────────────────────────── */
+@keyframes hero-fade {
+  0% {
+    opacity: 0;
+    transform: translate3d(0, 16px, 0);
+  }
+  100% {
+    opacity: 1;
+    transform: translate3d(0, 0, 0);
+  }
+}
+
+@keyframes marquee-scroll {
+  0% {
+    transform: translate3d(0, 0, 0);
+  }
+  100% {
+    transform: translate3d(-50%, 0, 0);
+  }
+}
+
+/* ─── Structural & Shape Utilities ────────────────────────── */
+.shape-arch {
+  border-top-left-radius: 9999px;
+  border-top-right-radius: 9999px;
+  border-bottom-left-radius: 24px;
+  border-bottom-right-radius: 24px;
+}
+
+.shape-arch-inv {
+  border-bottom-left-radius: 9999px;
+  border-bottom-right-radius: 9999px;
+  border-top-left-radius: 24px;
+  border-top-right-radius: 24px;
+}
+
+.shape-asym {
+  border-top-left-radius: 48px;
+  border-top-right-radius: 8px;
+  border-bottom-right-radius: 48px;
+  border-bottom-left-radius: 8px;
+}
+
+.brutal-shadow {
+  box-shadow: 8px 8px 0px var(--foreground);
+  transition: transform 0.25s cubic-bezier(0.4, 0, 0.2, 1), box-shadow 0.25s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.brutal-shadow:hover {
+  transform: translate(-4px, -4px);
+  box-shadow: 12px 12px 0px var(--foreground);
+}
+
+.brutal-shadow-sm {
+  box-shadow: 4px 4px 0px var(--foreground);
+}
+
+.brutal-shadow-sm:hover {
+  transform: translate(-2px, -2px);
+  box-shadow: 6px 6px 0px var(--foreground);
+}
+
+.clip-diagonal {
+  clip-path: polygon(0 0, 100% 4vw, 100% 100%, 0 100%);
+}
+
